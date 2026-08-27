@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Karthick's Study World - a simple student study hub for school, NEET and JEE preparation.">
+<title>Karthick's Study World</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#172033}
+.card{max-width:760px;margin:30px auto;padding:25px;background:#fff;border-radius:18px;box-shadow:0 8px 30px #0001}
+h1{text-align:center}
+.sub,.welcome{text-align:center;color:#667085}
+input{width:100%;padding:13px;margin:8px 0;border:1px solid #ccd3df;border-radius:10px;font-size:16px}
+button{padding:11px 15px;border:0;border-radius:10px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
+button:hover{opacity:.92}
+.login button{width:100%;margin-top:15px}
+.error{color:red;text-align:center;display:none;margin-top:10px}
+.dashboard{display:none}
+.status{padding:13px;margin:16px 0;border-radius:12px;background:#e8f7ed;color:#16733a;font-weight:bold}
+.search{display:flex;gap:8px;margin:20px 0}
+.search input{flex:1}
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.cat{background:#eef2ff;color:#243b8a}
+.cat.active{background:#2563eb;color:#fff}
+.material{padding:15px;margin:9px 0;border:1px solid #e1e6ef;border-radius:12px}
+.material b{display:block;margin-bottom:5px}
+.speech{padding:16px;margin:18px 0;background:#f7f9ff;border-left:4px solid #2563eb;line-height:1.5}
+.logout{background:#667085;margin-top:15px}
+.hidden{display:none}
+@media(max-width:600px){.card{margin:12px;padding:18px}.search{flex-direction:column}.search button{width:100%}}
+</style>
+</head>
+<body>
+
+<div class="card login" id="login">
+<h1>📚 Karthick's Study World</h1>
+<div class="sub">Personal Study Pass</div>
+<h3>Student Name</h3>
+<input id="name" placeholder="Enter your name" autocomplete="name">
+<h3>Student ID</h3>
+<input id="studentId" placeholder="Enter your ID" autocomplete="off">
+<button onclick="signIn()">Sign In</button>
+<div class="error" id="error">Demo login: Karthick / 007</div>
+</div>
+
+<div class="card dashboard" id="dashboard">
+<h1>🎓 Welcome to Karthick's Study World</h1>
+<div class="welcome">Your study hub for school, NEET and JEE preparation.</div>
+
+<div class="status">
+🟢 Access Status: ACTIVE<br>
+Student ID: 007
+</div>
+
+<div class="speech">
+<b>🎤 Welcome Speech</b>
+<p>Welcome to Karthick's Study World! This platform brings study materials, revision resources and practice questions together in one simple place.</p>
+<p>Choose your class or exam category, search for what you need, and prepare smarter.</p>
+<b>All the best for your studies! 🎓</b>
+</div>
+
+<div class="search">
+<input id="search" placeholder="🔎 Search materials..." oninput="filterMaterials()">
+<button onclick="clearSearch()">Clear</button>
+</div>
+
+<div class="cats">
+<button class="cat active" onclick="setCategory('All',this)">All</button>
+<button class="cat" onclick="setCategory('10th',this)">10th</button>
+<button class="cat" onclick="setCategory('11th',this)">11th</button>
+<button class="cat" onclick="setCategory('12th',this)">12th</button>
+<button class="cat" onclick="setCategory('NEET',this)">NEET</button>
+<button class="cat" onclick="setCategory('JEE',this)">JEE</button>
+</div>
+
+<div id="materials">
+<div class="material" data-cat="10th"><b>📘 10th — Revision Notes</b>Notes, important questions and practice resources.</div>
+<div class="material" data-cat="10th"><b>📝 10th — Question Papers & Answers</b>Previous and practice papers.</div>
+<div class="material" data-cat="11th"><b>📗 11th — Books & Notes</b>Subject-wise revision resources.</div>
+<div class="material" data-cat="11th"><b>📝 11th — Question Papers & Answers</b>Practice and revision papers.</div>
+<div class="material" data-cat="12th"><b>📕 12th — Books & Notes</b>Subject-wise study resources.</div>
+<div class="material" data-cat="12th"><b>📝 12th — Question Papers & Answers</b>Practice papers and answer resources.</div>
+<div class="material" data-cat="NEET"><b>🧪 NEET — Practice Questions</b>Biology, Physics and Chemistry practice.</div>
+<div class="material" data-cat="NEET"><b>✅ NEET — Answer Keys</b>Answer-key and revision resources.</div>
+<div class="material" data-cat="JEE"><b>⚙️ JEE — Practice Questions</b>Physics, Chemistry and Mathematics practice.</div>
+<div class="material" data-cat="JEE"><b>✅ JEE — Answer Keys</b>Answer-key and revision resources.</div>
+</div>
+
+<div id="none" class="hidden">No matching materials found.</div>
+<button class="logout" onclick="logout()">Sign Out</button>
+</div>
+
+<script>
+let currentCategory="All";
+
+function signIn(){
+const name=document.getElementById("name").value.trim().toLowerCase();
+const id=document.getElementById("studentId").value.trim();
+const error=document.getElementById("error");
+if(name==="karthick" && id==="007"){
+document.getElementById("login").style.display="none";
+document.getElementById("dashboard").style.display="block";
+error.style.display="none";
+}else{
+error.style.display="block";
+}
+}
+
+function setCategory(category,button){
+currentCategory=category;
+document.querySelectorAll(".cat").forEach(btn=>btn.classList.remove("active"));
+button.classList.add("active");
+filterMaterials();
+}
+
+function filterMaterials(){
+const searchText=document.getElementById("search").value.toLowerCase();
+const materials=document.querySelectorAll(".material");
+let count=0;
+materials.forEach(material=>{
+const category=material.getAttribute("data-cat");
+const text=material.innerText.toLowerCase();
+const categoryMatch=currentCategory==="All"||category===currentCategory;
+const searchMatch=text.includes(searchText);
+material.style.display=categoryMatch&&searchMatch?"block":"none";
+if(categoryMatch&&searchMatch) count++;
+});
+document.getElementById("none").classList.toggle("hidden",count>0);
+}
+
+function clearSearch(){
+document.getElementById("search").value="";
+filterMaterials();
+}
+
+function logout(){
+document.getElementById("dashboard").style.display="none";
+document.getElementById("login").style.display="block";
+document.getElementById("name").value="";
+document.getElementById("studentId").value="";
+document.getElementById("error").style.display="none";
+}
+</script>
+</body>
+</html>
