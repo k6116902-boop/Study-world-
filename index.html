@@ -1,336 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Karthick's Study World</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #eef2f7;
-      color: #172033;
-    }
-    .page {
-      max-width: 760px;
-      margin: 16px auto;
-      background: #fff;
-      border-radius: 28px;
-      padding: 28px 22px 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
-    }
-    h1 {
-      text-align: center;
-      font-size: 34px;
-      line-height: 1.15;
-      margin: 12px 0 36px;
-    }
-    .subtitle {
-      text-align: center;
-      color: #596273;
-      font-size: 21px;
-      margin-bottom: 26px;
-    }
-    .status {
-      background: #dcefe1;
-      color: #176a36;
-      border-radius: 18px;
-      padding: 17px 20px;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 28px;
-    }
-    .speech {
-      border-left: 6px solid #1f55bd;
-      background: #f3f5f8;
-      padding: 22px 20px;
-      margin-bottom: 28px;
-      font-size: 19px;
-      line-height: 1.55;
-    }
-    .speech h2 {
-      font-size: 22px;
-      margin: 0 0 20px;
-    }
-    .search {
-      width: 100%;
-      padding: 19px 20px;
-      border: 1px solid #bfc5ce;
-      border-radius: 18px;
-      font-size: 20px;
-      outline: none;
-      margin-bottom: 14px;
-    }
-    .search:focus { border-color: #1f55bd; }
-    .clear {
-      width: 100%;
-      border: 0;
-      border-radius: 15px;
-      padding: 16px;
-      background: #2256bd;
-      color: white;
-      font-size: 19px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-bottom: 26px;
-    }
-    .clear:active, .filter:active { transform: scale(.98); }
-
-    .filters {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-    .filter {
-      border: 0;
-      border-radius: 15px;
-      padding: 17px 8px;
-      background: #e9edf3;
-      color: #172033;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .filter.active {
-      background: #2256bd;
-      color: #fff;
-    }
-
-    #resultTitle {
-      font-size: 24px;
-      margin: 0 0 14px;
-    }
-    .materials {
-      display: grid;
-      gap: 14px;
-    }
-    .card {
-      border: 1px solid #c9ced6;
-      border-radius: 18px;
-      padding: 20px;
-      background: #fff;
-    }
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 21px;
-    }
-    .card p {
-      margin: 0 0 16px;
-      font-size: 18px;
-      color: #303948;
-      line-height: 1.4;
-    }
-    .tag {
-      display: inline-block;
-      padding: 7px 11px;
-      border-radius: 10px;
-      background: #e9eef9;
-      color: #244f9f;
-      font-weight: 700;
-      font-size: 14px;
-      margin-right: 8px;
-    }
-    .open {
-      display: inline-block;
-      padding: 10px 15px;
-      border-radius: 10px;
-      background: #2256bd;
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-      cursor: pointer;
-      border: 0;
-      font-size: 15px;
-    }
-    .empty {
-      text-align: center;
-      padding: 28px 10px;
-      color: #667085;
-      font-size: 18px;
-    }
-    .signout {
-      margin-top: 30px;
-      border: 0;
-      border-radius: 15px;
-      padding: 16px 22px;
-      background: #5b6579;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    @media (max-width: 600px) {
-      .page { margin: 0; min-height: 100vh; border-radius: 0; padding: 24px 18px; }
-      h1 { font-size: 32px; }
-      .subtitle { font-size: 20px; }
-      .filters { grid-template-columns: repeat(3, 1fr); }
-      .filter { font-size: 15px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Karthick's Study World</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033}
+.page{max-width:760px;margin:16px auto;background:#fff;border-radius:28px;padding:28px 22px;box-shadow:0 5px 20px #0001}
+.login{max-width:500px;margin:70px auto;text-align:center}.login h1{font-size:32px;line-height:1.2}.login p{color:#596273;font-size:18px}
+input{width:100%;padding:17px;margin:8px 0;border:1px solid #bcc3ce;border-radius:14px;font-size:18px}
+button{border:0;border-radius:14px;padding:16px;font-size:18px;font-weight:bold;cursor:pointer}
+.login button{width:100%;background:#2256bd;color:#fff;margin-top:12px}
+.error{color:#c62828;font-weight:bold;min-height:24px}
+h1{text-align:center;font-size:34px}.subtitle{text-align:center;color:#596273;font-size:20px;margin-bottom:25px}
+.status{background:#dcefe1;color:#176a36;border-radius:18px;padding:17px 20px;font-size:20px;font-weight:bold;margin-bottom:28px}
+.speech{border-left:6px solid #2256bd;background:#f3f5f8;padding:20px;font-size:18px;line-height:1.55;margin-bottom:28px}
+.search{margin-bottom:14px}.clear{width:100%;background:#2256bd;color:#fff;margin-bottom:25px}
+.filters{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-bottom:25px}
+.filter{background:#e9edf3;color:#172033;padding:15px 5px;font-size:15px}.filter.active{background:#2256bd;color:white}
+.card{border:1px solid #c9ced6;border-radius:18px;padding:20px;margin-bottom:14px}.card h3{margin:0 0 8px;font-size:21px}.card p{font-size:17px;color:#303948}
+.tag{display:inline-block;background:#e9eef9;color:#244f9f;padding:7px 10px;border-radius:9px;font-weight:bold}
+.signout{background:#5b6579;color:#fff;margin-top:15px}
+@media(max-width:600px){.page{margin:0;min-height:100vh;border-radius:0}.filters{grid-template-columns:repeat(3,1fr)}}
+</style>
 </head>
-
 <body>
-  <main class="page">
-    <h1>🎓 Welcome to Karthick's<br>Study World</h1>
 
-    <div class="subtitle">
-      Your study hub for school, NEET and JEE preparation.
-    </div>
+<div id="loginPage" class="page login">
+<h1>🎓 Karthick's<br>Study World</h1>
+<p>Sign in to access your study materials.</p>
+<input id="studentId" type="text" placeholder="Student ID" autocomplete="username">
+<input id="password" type="password" placeholder="Password" autocomplete="current-password">
+<div id="error" class="error"></div>
+<button id="loginBtn">🔐 Sign In</button>
+</div>
 
-    <div class="status">
-      🟢 Access Status: ACTIVE<br>
-      Student ID: 007
-    </div>
+<div id="appPage" class="page" style="display:none">
+<h1>🎓 Welcome to Karthick's<br>Study World</h1>
+<div class="subtitle">Your study hub for school, NEET and JEE preparation.</div>
+<div class="status">🟢 Access Status: ACTIVE<br>Student ID: 007</div>
 
-    <section class="speech">
-      <h2>🎤 Welcome Speech</h2>
-      <p>
-        Welcome to Karthick's Study World! This platform brings study
-        materials, revision resources and practice questions together in
-        one simple place.
-      </p>
-      <p>
-        Choose your class or exam category, search for what you need,
-        and prepare smarter.
-      </p>
-      <p><strong>All the best for your studies! 🎓</strong></p>
-    </section>
+<section class="speech">
+<h2>🎤 Welcome Speech</h2>
+<p>Welcome to Karthick's Study World! This platform brings study materials, revision resources and practice questions together in one simple place.</p>
+<p>Choose your class or exam category, search for what you need, and prepare smarter.</p>
+<p><strong>All the best for your studies! 🎓</strong></p>
+</section>
 
-    <input
-      id="searchBox"
-      class="search"
-      type="search"
-      placeholder="🔎 Search materials..."
-      autocomplete="off"
-    >
+<input id="searchBox" class="search" type="search" placeholder="🔎 Search materials...">
+<button id="clearBtn" class="clear">Clear</button>
 
-    <button id="clearBtn" class="clear" type="button">Clear</button>
+<div class="filters">
+<button class="filter active" data-category="All">All</button>
+<button class="filter" data-category="10th">10th</button>
+<button class="filter" data-category="11th">11th</button>
+<button class="filter" data-category="12th">12th</button>
+<button class="filter" data-category="NEET">NEET</button>
+<button class="filter" data-category="JEE">JEE</button>
+</div>
 
-    <div class="filters" role="group" aria-label="Study category">
-      <button class="filter active" data-category="All" type="button">All</button>
-      <button class="filter" data-category="10th" type="button">10th</button>
-      <button class="filter" data-category="11th" type="button">11th</button>
-      <button class="filter" data-category="12th" type="button">12th</button>
-      <button class="filter" data-category="NEET" type="button">NEET</button>
-      <button class="filter" data-category="JEE" type="button">JEE</button>
-    </div>
+<h2 id="resultTitle">📚 All Materials</h2>
+<div id="materials"></div>
+<button id="signout" class="signout">Sign Out</button>
+</div>
 
-    <h2 id="resultTitle">📚 All Materials</h2>
-    <div id="materials" class="materials"></div>
+<script>
+const STUDENT_ID="007";
+const PASSWORD="Karthick123";
 
-    <button id="signOut" class="signout" type="button">Sign Out</button>
-  </main>
+const materials=[
+["10th","📘 10th — Study Materials","Class 10 study notes and revision resources."],
+["10th","📝 10th — Practice Questions","Practice questions for Class 10 subjects."],
+["11th","📘 11th — Study Materials","Class 11 notes and important revision resources."],
+["11th","📝 11th — Practice Questions","Practice questions for Class 11 subjects."],
+["12th","📘 12th — Study Materials","Class 12 notes and important revision resources."],
+["12th","📝 12th — Practice Questions","Practice questions for Class 12 subjects."],
+["NEET","🧪 NEET — Practice Questions","Biology, Physics and Chemistry practice."],
+["NEET","✅ NEET — Answer Keys","Answer-key and revision resources."],
+["NEET","📖 NEET — Revision Notes","Quick revision resources for NEET preparation."],
+["JEE","🧮 JEE — Practice Questions","Physics, Chemistry and Mathematics practice."],
+["JEE","✅ JEE — Answer Keys","Answer-key and revision resources for JEE."],
+["JEE","📖 JEE — Revision Notes","Quick revision resources for JEE preparation."]
+];
 
-  <script>
-    // All study materials are stored here.
-    // To add your own material later, add another object to this list.
-    const materials = [
-      { category: "10th", title: "📘 10th — Study Materials", description: "Class 10 study notes and revision resources." },
-      { category: "10th", title: "📝 10th — Practice Questions", description: "Practice questions for Class 10 subjects." },
+let category="All";
+const $=id=>document.getElementById(id);
 
-      { category: "11th", title: "📘 11th — Study Materials", description: "Class 11 notes and important revision resources." },
-      { category: "11th", title: "📝 11th — Practice Questions", description: "Practice questions for Class 11 subjects." },
+function showApp(){
+ $("loginPage").style.display="none";
+ $("appPage").style.display="block";
+ render();
+}
+function render(){
+ const q=$("searchBox").value.toLowerCase().trim();
+ const list=materials.filter(x=>(category==="All"||x[0]===category)&&
+   (!q||x.join(" ").toLowerCase().includes(q)));
+ $("resultTitle").textContent="📚 "+(category==="All"?"All Materials":category+" Materials");
+ $("materials").innerHTML=list.length?list.map(x=>`
+ <article class="card"><h3>${x[1]}</h3><p>${x[2]}</p>
+ <span class="tag">${x[0]}</span></article>`).join(""):
+ '<p style="text-align:center;color:#667085">No materials found.</p>';
+}
 
-      { category: "12th", title: "📘 12th — Study Materials", description: "Class 12 notes and important revision resources." },
-      { category: "12th", title: "📝 12th — Practice Questions", description: "Practice questions for Class 12 subjects." },
+$("loginBtn").onclick=()=>{
+ const id=$("studentId").value.trim(), pass=$("password").value;
+ if(id===STUDENT_ID && pass===PASSWORD){
+   sessionStorage.setItem("ksw_logged_in","yes"); $("error").textContent=""; showApp();
+ }else $("error").textContent="❌ Incorrect Student ID or password.";
+};
+$("password").addEventListener("keydown",e=>{if(e.key==="Enter")$("loginBtn").click()});
+document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{
+ category=b.dataset.category;
+ document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); render();
+});
+$("searchBox").oninput=render;
+$("clearBtn").onclick=()=>{$("searchBox").value="";category="All";document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.category==="All"));render()};
+$("signout").onclick=()=>{sessionStorage.removeItem("ksw_logged_in");location.reload()};
 
-      { category: "NEET", title: "🧪 NEET — Practice Questions", description: "Biology, Physics and Chemistry practice." },
-      { category: "NEET", title: "✅ NEET — Answer Keys", description: "Answer-key and revision resources." },
-      { category: "NEET", title: "📖 NEET — Revision Notes", description: "Quick revision resources for NEET preparation." },
-
-      { category: "JEE", title: "🧮 JEE — Practice Questions", description: "Physics, Chemistry and Mathematics practice." },
-      { category: "JEE", title: "✅ JEE — Answer Keys", description: "Answer-key and revision resources for JEE." },
-      { category: "JEE", title: "📖 JEE — Revision Notes", description: "Quick revision resources for JEE preparation." }
-    ];
-
-    let selectedCategory = "All";
-
-    const materialsBox = document.getElementById("materials");
-    const resultTitle = document.getElementById("resultTitle");
-    const searchBox = document.getElementById("searchBox");
-    const clearBtn = document.getElementById("clearBtn");
-    const filterButtons = document.querySelectorAll(".filter");
-
-    function renderMaterials() {
-      const query = searchBox.value.trim().toLowerCase();
-
-      const filtered = materials.filter(item => {
-        const categoryMatch =
-          selectedCategory === "All" || item.category === selectedCategory;
-
-        const text = (item.title + " " + item.description + " " + item.category).toLowerCase();
-        const searchMatch = !query || text.includes(query);
-
-        return categoryMatch && searchMatch;
-      });
-
-      resultTitle.textContent =
-        selectedCategory === "All"
-          ? "📚 All Materials"
-          : "📚 " + selectedCategory + " Materials";
-
-      materialsBox.innerHTML = "";
-
-      if (filtered.length === 0) {
-        materialsBox.innerHTML =
-          '<div class="empty">No materials found. Try another category or search.</div>';
-        return;
-      }
-
-      filtered.forEach(item => {
-        const card = document.createElement("article");
-        card.className = "card";
-
-        card.innerHTML = `
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <span class="tag">${item.category}</span>
-          <button class="open" type="button">Open</button>
-        `;
-
-        // Safe placeholder action until real files/links are added.
-        card.querySelector(".open").addEventListener("click", () => {
-          alert(item.title + "\\n\\nAdd your PDF, notes or website link to this material in the HTML file.");
-        });
-
-        materialsBox.appendChild(card);
-      });
-    }
-
-    // FIX: Every category button now changes the selected category and re-renders.
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        selectedCategory = button.dataset.category;
-
-        filterButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-
-        renderMaterials();
-      });
-    });
-
-    searchBox.addEventListener("input", renderMaterials);
-
-    clearBtn.addEventListener("click", () => {
-      searchBox.value = "";
-      selectedCategory = "All";
-
-      filterButtons.forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.category === "All");
-      });
-
-      renderMaterials();
-      searchBox.focus();
-    });
-
-    document.getElementById("signOut").addEventListener("click", () => {
-      alert("Sign Out clicked.");
-    });
-
-    // Show all materials when the page first opens.
-    renderMaterials();
-  </script>
+if(sessionStorage.getItem("ksw_logged_in")==="yes")showApp();
+</script>
 </body>
 </html>
